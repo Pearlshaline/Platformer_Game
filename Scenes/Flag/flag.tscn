@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bjykhpn3eifm"]
+
+[ext_resource type="Script" uid="uid://chroq6parc6ql" path="res://Scenes/Flag/flag.gd" id="1_yqol3"]
+[ext_resource type="Texture2D" uid="uid://dmtnt2b2y4nir" path="res://assets/player/Flag.png" id="2_xlanu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqol3"]
+radius = 16.0
+height = 40.0
+
+[node name="Flag" type="Area2D" unique_id=1111580153]
+script = ExtResource("1_yqol3")
+
+[node name="Flag" type="Sprite2D" parent="." unique_id=871342439]
+position = Vector2(9.536743e-07, 9.536743e-07)
+scale = Vector2(0.062300324, 0.06549521)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=515045461]
+visible = false
+shape = SubResource("CapsuleShape2D_yqol3")
+
+[node name="Flag2" type="Sprite2D" parent="." unique_id=1118415799]
+position = Vector2(-1.1920929e-07, 1.7881393e-07)
+scale = Vector2(0.08146967, 0.062699705)
+texture = ExtResource("2_xlanu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

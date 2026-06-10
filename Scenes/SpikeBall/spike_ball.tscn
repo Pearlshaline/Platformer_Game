@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ppjgs1f1drn1"]
+
+[ext_resource type="Texture2D" uid="uid://b0vceedm02oxt" path="res://assets/danger/spiked_ball.png" id="1_hd7xr"]
+[ext_resource type="Script" path="res://Scenes/SpikeBall/spike_ball.gd" id="2_spikeball"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h58x0"]
+radius = 18.0
+
+[node name="SpikeBall" type="Node2D" unique_id=1683092318]
+script = ExtResource("2_spikeball")
+
+[node name="SpikedBall" type="Sprite2D" parent="." unique_id=1091280782]
+position = Vector2(2.3841858e-07, 0)
+scale = Vector2(1.4821428, 1.2142856)
+texture = ExtResource("1_hd7xr")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1905238219]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=522089989]
+visible = false
+shape = SubResource("CircleShape2D_h58x0")

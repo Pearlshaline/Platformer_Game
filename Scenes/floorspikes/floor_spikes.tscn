@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://btoaqc2j66mg2"]
+
+[ext_resource type="Texture2D" uid="uid://bhs4cww0wfc8v" path="res://assets/danger/floor_spikes.png" id="1_t6ivh"]
+[ext_resource type="Script" path="res://Scenes/floorspikes/floor_spikes.gd" id="2_floorspikes"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6ivh"]
+size = Vector2(224, 8)
+
+[node name="FloorSpikes" type="Node2D" unique_id=401404155]
+script = ExtResource("2_floorspikes")
+
+[node name="FloorSpikes" type="Sprite2D" parent="." unique_id=1591155236]
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes2" type="Sprite2D" parent="." unique_id=1628264320]
+position = Vector2(16, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes3" type="Sprite2D" parent="." unique_id=991701907]
+position = Vector2(32, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes4" type="Sprite2D" parent="." unique_id=1822899895]
+position = Vector2(-16, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes5" type="Sprite2D" parent="." unique_id=1382001464]
+position = Vector2(-32, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes6" type="Sprite2D" parent="." unique_id=996337726]
+position = Vector2(-48, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes7" type="Sprite2D" parent="." unique_id=2056386103]
+position = Vector2(48, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes8" type="Sprite2D" parent="." unique_id=339472171]
+position = Vector2(-64, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes9" type="Sprite2D" parent="." unique_id=1426039366]
+position = Vector2(64, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes10" type="Sprite2D" parent="." unique_id=209349212]
+position = Vector2(-80, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes11" type="Sprite2D" parent="." unique_id=1932362629]
+position = Vector2(80, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes12" type="Sprite2D" parent="." unique_id=923184055]
+position = Vector2(-96, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes13" type="Sprite2D" parent="." unique_id=718675228]
+position = Vector2(96, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="FloorSpikes15" type="Sprite2D" parent="." unique_id=2069228989]
+position = Vector2(112, 0)
+texture = ExtResource("1_t6ivh")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=338350166]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=696160390]
+position = Vector2(8, -4)
+shape = SubResource("RectangleShape2D_t6ivh")

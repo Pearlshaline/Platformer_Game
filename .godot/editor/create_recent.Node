@@ -1,0 +1,14 @@
+CollisionPolygon2D
+CollisionShape2D
+Marker2D
+Label
+ColorRect
+Area2D
+Node2D
+AnimationPlayer
+AnimationTree
+CharacterBody2D
+StaticBody2D
+Sprite2D
+Camera2D
+AnimatedSprite2D
