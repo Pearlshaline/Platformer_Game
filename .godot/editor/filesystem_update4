@@ -1,9 +1,1 @@
-res://Scenes/Boss/boss.gd
-res://Scenes/eagle/eagle.gd
-res://Scenes/Flag/flag.gd
-res://Scenes/floorspikes/floor_spikes.gd
-res://Scenes/Key/key.gd
-res://Scenes/LevelBase/level_base.gd
-res://Scenes/Player2/player_2.gd
-res://Scenes/PlayerCam/player_cam.tscn
-res://Scenes/SpikeBall/spike_ball.gd
+res://Scenes/LevelBase/level_base.tscn
