@@ -11,6 +11,10 @@ var game_running        = true
 var elapsed_time    = 0.0
 const BEST_TIME_KEY = "best_completion_time"
 
+# ── Sound ─────────────────────────────────────────────────────────────────────
+const PICKUP_SFX = preload("uid://cebj23nx8uaca")
+var _sfx_pickup : AudioStreamPlayer
+
 # ── World node refs ───────────────────────────────────────────────────────────
 @onready var spike_ball  = $SpikeBall
 @onready var pixel_heart = $PixelHeart2
@@ -18,7 +22,7 @@ const BEST_TIME_KEY = "best_completion_time"
 @onready var _world_label = $Label
 @onready var _world_panel = $GameOverPanel
 
-# ── CanvasLayer HUD (built at runtime, follows camera) ───────────────────────
+# ── CanvasLayer HUD ───────────────────────────────────────────────────────────
 var _canvas           : CanvasLayer
 var key_label         : Label
 var timer_label       : Label
@@ -27,8 +31,6 @@ var go_label          : Label
 var final_score_label : Label
 var high_score_label  : Label
 var restart_hint      : Label
-
-# Dedicated restart node that keeps processing while the tree is paused
 var _restart_listener : Node
 
 
@@ -36,6 +38,11 @@ var _restart_listener : Node
 func _ready() -> void:
 	_world_label.visible = false
 	_world_panel.visible = false
+
+	# Pickup sound player
+	_sfx_pickup = AudioStreamPlayer.new()
+	_sfx_pickup.stream = PICKUP_SFX
+	add_child(_sfx_pickup)
 
 	var player = get_node_or_null("Player2")
 	if player:
@@ -63,7 +70,7 @@ func _ready() -> void:
 		if lm and rm and eagle.has_method("set_patrol_marks"):
 			eagle.set_patrol_marks(lm.global_position.x, rm.global_position.x)
 
-	# Heart pickup via Area2D if present
+	# Heart pickup via Area2D
 	if pixel_heart:
 		var heart_area = pixel_heart.get_node_or_null("Area2D")
 		if heart_area:
@@ -76,7 +83,6 @@ func _build_hud() -> void:
 	_canvas.layer = 10
 	add_child(_canvas)
 
-	# ── HUD: key counter and timer (top-left) ───────────────────────────────
 	key_label = Label.new()
 	key_label.text = "Keys: 0 / 3"
 	key_label.add_theme_font_size_override("font_size", 26)
@@ -91,61 +97,54 @@ func _build_hud() -> void:
 	timer_label.position = Vector2(16, 48)
 	_canvas.add_child(timer_label)
 
-	# ── Panel: centred in a 960x540 canvas ──────────────────────────────────
-	# Panel is 400 wide x 240 tall, centred at (280, 150)
-	const PANEL_W  = 400.0
-	const PANEL_H  = 240.0
-	const PANEL_X  = 280.0   # (960 - 400) / 2
-	const PANEL_Y  = 150.0   # (540 - 240) / 2
+	const PANEL_W = 400.0
+	const PANEL_H = 240.0
+	const PANEL_X = 280.0
+	const PANEL_Y = 150.0
 
 	game_over_panel = ColorRect.new()
-	game_over_panel.color   = Color(0.08, 0.08, 0.12, 0.92)
-	game_over_panel.size    = Vector2(PANEL_W, PANEL_H)
+	game_over_panel.color    = Color(0.08, 0.08, 0.12, 0.92)
+	game_over_panel.size     = Vector2(PANEL_W, PANEL_H)
 	game_over_panel.position = Vector2(PANEL_X, PANEL_Y)
-	game_over_panel.visible = false
+	game_over_panel.visible  = false
 	_canvas.add_child(game_over_panel)
 
-	# Title label — fits inside panel width with font size 36
 	go_label = Label.new()
 	go_label.text = "GAME OVER"
 	go_label.add_theme_font_size_override("font_size", 36)
 	go_label.add_theme_color_override("font_color", Color(1, 0.2, 0.2))
-	go_label.size             = Vector2(PANEL_W, 50)
-	go_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	go_label.position         = Vector2(0, 20)
+	go_label.size                    = Vector2(PANEL_W, 50)
+	go_label.horizontal_alignment    = HORIZONTAL_ALIGNMENT_CENTER
+	go_label.position                = Vector2(0, 20)
 	game_over_panel.add_child(go_label)
 
-	# Your Time
 	final_score_label = Label.new()
 	final_score_label.text = "Your Time: --"
 	final_score_label.add_theme_font_size_override("font_size", 24)
 	final_score_label.add_theme_color_override("font_color", Color.WHITE)
-	final_score_label.size             = Vector2(PANEL_W, 36)
+	final_score_label.size                 = Vector2(PANEL_W, 36)
 	final_score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	final_score_label.position         = Vector2(0, 88)
+	final_score_label.position             = Vector2(0, 88)
 	game_over_panel.add_child(final_score_label)
 
-	# Best Time
 	high_score_label = Label.new()
 	high_score_label.text = "Best Time: --"
 	high_score_label.add_theme_font_size_override("font_size", 24)
 	high_score_label.add_theme_color_override("font_color", Color(1, 0.85, 0.2))
-	high_score_label.size             = Vector2(PANEL_W, 36)
+	high_score_label.size                 = Vector2(PANEL_W, 36)
 	high_score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	high_score_label.position         = Vector2(0, 130)
+	high_score_label.position             = Vector2(0, 130)
 	game_over_panel.add_child(high_score_label)
 
-	# Restart hint
 	restart_hint = Label.new()
 	restart_hint.text = "Press  R  to Restart"
 	restart_hint.add_theme_font_size_override("font_size", 20)
 	restart_hint.add_theme_color_override("font_color", Color(0.7, 1, 0.7))
-	restart_hint.size             = Vector2(PANEL_W, 30)
+	restart_hint.size                 = Vector2(PANEL_W, 30)
 	restart_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	restart_hint.position         = Vector2(0, 195)
+	restart_hint.position             = Vector2(0, 195)
 	game_over_panel.add_child(restart_hint)
 
-	# ── Restart listener — process_mode = ALWAYS so it works while paused ──
 	_restart_listener = Node.new()
 	_restart_listener.set_script(_make_restart_script())
 	_restart_listener.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -153,7 +152,6 @@ func _build_hud() -> void:
 	add_child(_restart_listener)
 
 
-# Build an inline script for the listener node so it can poll input while paused
 func _make_restart_script() -> GDScript:
 	var s = GDScript.new()
 	s.source_code = """extends Node
@@ -184,6 +182,8 @@ func _on_key_picked_up(body, key_node, key_number: int) -> void:
 	key_node.collect()
 	keys_collected += 1
 	_update_key_label()
+	# Play pickup sound on key collect
+	_sfx_pickup.play()
 
 	if key_number == 1 and not first_key_triggered:
 		first_key_triggered = true
@@ -203,8 +203,8 @@ func _try_give_heart(body) -> void:
 		return
 	if not body.has_method("add_heart"):
 		return
-	if body.hearts >= 3:
-		return
+
+	# Always collect the heart and play sound — even if hearts are full
 	heart_available = false
 	pixel_heart.visible = false
 	var ha = pixel_heart.get_node_or_null("Area2D")
@@ -212,6 +212,9 @@ func _try_give_heart(body) -> void:
 		for c in ha.get_children():
 			if c is CollisionShape2D:
 				c.set_deferred("disabled", true)
+
+	_sfx_pickup.play()
+	# add_heart() in player handles the full-heart check — won't exceed 3
 	body.add_heart()
 
 
