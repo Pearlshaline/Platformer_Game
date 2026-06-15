@@ -1,5 +1,5 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1781440162
+::res://::1781529068
 icon.svg::CompressedTexture2D::4817894111877080472::1780575073::1780575073::1::::<><><>0<>0<>d089b273879588d6d4092fc8ee3b874f<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://assets/::1780734220
 ::res://assets/backgrounds/::1780575234
@@ -134,9 +134,9 @@ floor_spikes.tscn::PackedScene::3748938721283028831::1781398874::0::1::::<><><>0
 ::res://Scenes/Key/::1781398888
 key.gd::GDScript::3576117871615620204::1781398875::0::1::::<>CharacterBody2D<><>0<>0<><>::
 key.tscn::PackedScene::6698337251076277183::1781398875::0::1::::<><><>0<>0<><>::uid://bjmwu8ml4arvn::::res://assets/player/key.png<>res://Scenes/Key/key.gd
-::res://Scenes/LevelBase/::1781425331
+::res://Scenes/LevelBase/::1781440192
 level_base.gd::GDScript::6350226515513255371::1781398875::0::1::::<>Node2D<><>0<>0<><>::
-level_base.tscn::PackedScene::2721393626612531303::1781398875::0::1::::<><><>0<>0<><>::uid://mjfwn2cbv7yf::::res://assets/tiles/Terrain (16x16).png<>uid://cwqdkkgnli37l::::res://Scenes/LevelBase/level_base.gd<>uid://dxdduq5gosfrn::::res://assets/items/pixel heart 2.png<>uid://ppjgs1f1drn1::::res://Scenes/SpikeBall/spike_ball.tscn<>uid://c4hetsinjo5dn::::res://Scenes/eagle/eagle.tscn<>uid://btoaqc2j66mg2::::res://Scenes/floorspikes/floor_spikes.tscn<>uid://ci4k2161oigtc::::res://Scenes/Player2/player_2.tscn<>uid://c2oyvvc4h1aod::::res://Scenes/Key/key.tscn<>uid://bq6ica4gvilgt::::res://Scenes/Boss/boss.tscn<>uid://bjykhpn3eifm::::res://Scenes/Flag/flag.tscn
+level_base.tscn::PackedScene::2721393626612531303::1781440192::0::1::::<><><>0<>0<><>::uid://mjfwn2cbv7yf::::res://assets/tiles/Terrain (16x16).png<>uid://cwqdkkgnli37l::::res://Scenes/LevelBase/level_base.gd<>uid://dxdduq5gosfrn::::res://assets/items/pixel heart 2.png<>uid://ppjgs1f1drn1::::res://Scenes/SpikeBall/spike_ball.tscn<>uid://c4hetsinjo5dn::::res://Scenes/eagle/eagle.tscn<>uid://btoaqc2j66mg2::::res://Scenes/floorspikes/floor_spikes.tscn<>uid://ci4k2161oigtc::::res://Scenes/Player2/player_2.tscn<>uid://c2oyvvc4h1aod::::res://Scenes/Key/key.tscn<>uid://bq6ica4gvilgt::::res://Scenes/Boss/boss.tscn<>uid://bjykhpn3eifm::::res://Scenes/Flag/flag.tscn
 ::res://Scenes/Player2/::1781425334
 player_2.gd::GDScript::3174805648267182302::1781425333::0::1::::<>CharacterBody2D<><>0<>0<><>::
 player_2.tscn::PackedScene::5394875872417683904::1781398875::0::1::::<><><>0<>0<><>::uid://hyds5ely7o8c::::res://Scenes/PlayerCam/player_cam.tscn<>uid://cnpeixi33jpw8::::res://assets/player/spritesheet_final (1).png<>uid://dxdduq5gosfrn::::res://assets/items/pixel heart 2.png<>uid://blh5t5p83tn07::::res://Scenes/Player2/player_2.gd
